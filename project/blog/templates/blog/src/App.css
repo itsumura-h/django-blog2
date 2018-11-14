@@ -1,0 +1,134 @@
+/*
+.App {
+  text-align: center;
+}
+/*
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/*背景色*/
+.plain{
+  background-size: 500px 500px;
+  background-position: 0 0, 500px 500px;
+  background-color: #ccc !important;
+  background-image:
+    repeating-radial-gradient(#f00, #f00 15%, #fff 15%, #fff 30%,
+                          #00f 30%, #00f 45%, #ccc 45%, #ccc 100%);
+  }
+.series{
+  background-image:
+    repeating-linear-gradient(45deg, #f33, #f33 30px, black 20px, black 40px);
+}
+.note{
+  background-color: #fff !important;
+  /*background-image: linear-gradient(90deg, orange 45%, white 45%, white 55%, orange 55%);*/
+  background-image: linear-gradient(90deg, orange 45%, transparent 45%),
+                    linear-gradient(90deg, white 55%, transparent 55%),
+                    linear-gradient(90deg, orange 100%, transparent 100%)
+  ;
+}
+.all{
+  background-color: #3f3 !important;
+  background-image: 
+    repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+    repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+    repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
+}
+.native{
+  background-size: 100px 100px;
+  background-color: #33f !important;
+  background-position: 0 0, 50px 50px;
+  background-image: radial-gradient(#000 20%, transparent 0), radial-gradient(#000 20%, transparent 0);
+}
+.management{
+  background-image: linear-gradient(90deg, purple 10%, #CFB53B 5%, #CFB53B 12%, purple 12%, purple 88%, #CFB53B 88%, #CFB53B 90%, purple 89%);
+}
+/*10 2 76 2 10
+10 12 88 90 100
+*/
+
+.noteeeeee{
+  background-color: #333 !important;
+  background-image: -webkit-linear-gradient(45deg,  #888 25%, #888 25%, transparent 25%, transparent 75%, #888 75%, #888 75%),
+                    -webkit-linear-gradient(-45deg, #888 25%, #888 25%, transparent 25%, transparent 75%, #888 75%, #888 75%);
+  background-image: linear-gradient(45deg,  #888 25%, #888 25%, transparent 25%, transparent 75%, #888 75%, #888 75%),
+                    linear-gradient(-45deg, #888 25%, #888 25%, transparent 25%, transparent 75%, #888 75%, #888 75%);
+  /*-webkit-background-size: 100px 100px;*/
+  background-size: 100px 100px;
+}
+
+/*Appbar タイトル横スクロール*/
+/* https://ja.stackoverflow.com/questions/23539/marqueeをcssに代替するには */
+
+.marquee {
+  overflow:hidden;
+}
+.marquee h2 {
+  margin:0;
+  display:inline-block;
+  white-space:nowrap;
+  animation-name:marquee;
+  animation-duration:10s;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+}
+@keyframes marquee {
+  from { transform:translate(+85%); }
+  to   { transform:translate(-100%); }
+}
+
+/*タイトル文字*/
+.Title {
+  color: #00f;
+  font-weight: bold !important;
+  font-size: x-large !important;
+  text-shadow: white 1px 1px 0px, white -1px 1px 0px, white 1px -1px 0px, white -1px -1px 0px !important;
+  line-height:1.4em !important;
+  padding : 0px !important;
+}
+
+/*Drawer内文字*/
+/*
+.Drawer span{
+  font-weight: bold !important;
+  font-size: larger !important;
+  text-shadow: white 1px 1px 0px, white -1px 1px 0px, white 1px -1px 0px, white -1px -1px 0px !important;
+  line-height:1.4em !important;
+  padding : 0px !important;
+}
+*/
+
+/*tab内文字*/
+.Tab {
+  opacity: 1 !important;
+  height: 100%;
+}
+.Tab span {
+  min-width: 120px;
+  color: #fff;
+  font-size: large;
+} 
