@@ -29,4 +29,9 @@ export default class Models extends React.Component{
     const url = '/blog/api/getArticle/' + timestamp;
     return Util.getAPI(url);
   }
+
+  static getLatests=()=>{
+    const url = '/blog/api/getLatests';
+    return Util.getAPI(url);
+  }
 }

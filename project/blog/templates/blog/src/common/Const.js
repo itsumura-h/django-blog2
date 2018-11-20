@@ -2,15 +2,15 @@ const DEV = {
   num: 1,
   char: 'aaa',
   APIMODE: {mode: 'no-cors'},
-  APIHOST: 'http://localhost:8000',
+  APIHOST: 'http://localhost:8001',
 }
 
 const PROD = {
   num: 2,
   char: 'bbb',
-  APIMODE: {mode: 'no-cors'},
+  APIMODE: '',
   //APIHOST: 'http://dumblepy.site',
-  APIHOST: 'http://localhost:8000',
+  APIHOST: 'http://localhost:8001',
 }
 
 let CONST = null;

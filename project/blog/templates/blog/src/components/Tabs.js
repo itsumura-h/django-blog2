@@ -10,14 +10,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
 class ClassTabs extends React.Component {
-  state = {
-    value: 0,
-  };
-
-  tabsClick = (event, value) => {
-    this.setState({ value });
-  };
-
   linkClick=(e)=>{
     window.sessionStorage.removeItem('backgroundImg');
     const data_tab = e.currentTarget.getAttribute('data-tab');
@@ -35,8 +27,7 @@ class ClassTabs extends React.Component {
       <div>
         <AppBar position="static" className={backgroundImg}>
           <Tabs 
-            value={this.state.value}
-            onChange={this.tabsClick}
+            value={false}
             fullWidth
             scrollable
             scrollButtons="auto"

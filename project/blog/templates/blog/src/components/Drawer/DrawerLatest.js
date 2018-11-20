@@ -7,27 +7,29 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import FibernewIcon from '@material-ui/icons/FiberNew'
 
 import Models from '../../common/Models';
 import Link from 'react-router-dom/Link';
 
-class ClassDrawerNotes extends React.PureComponent {
+class ClassDrawerLatest extends React.PureComponent {
   state = {
     articles: null
   }
   
-  getNotes=()=>{
-    Models.getNotes()
+  getLatests=()=>{
+    Models.getLatests()
     .then(response=>{
+      console.log(response);
       this.setState({articles: response});
     })
     .catch(err=>{
-      console.log('Models.getNotes() error');
+      console.log('Models.getLatests() error');
     })
   }
   
   componentDidMount(){
-    this.getNotes();
+    this.getLatests();
   }
 
   render() {
@@ -36,7 +38,7 @@ class ClassDrawerNotes extends React.PureComponent {
       articles.push(
         <Link
           key={i}
-          to={"/blog/notes/"+this.state.articles[i].timestamp}
+          to={"/blog/latest/"+this.state.articles[i].timestamp}
         >
           <ListItem button
             onClick={this.props.appProps.drawer_changeDrawerOpen}
@@ -49,6 +51,12 @@ class ClassDrawerNotes extends React.PureComponent {
 
     return (
       <div>
+        <ListItem>
+          <ListItemIcon>
+            <FibernewIcon />
+          </ListItemIcon>
+          <ListItemText primary="新着20件" />
+        </ListItem>
         {articles}
       </div>
     );
@@ -56,4 +64,4 @@ class ClassDrawerNotes extends React.PureComponent {
 }
 
 const styles = {}
-export default withStyles(styles)(ClassDrawerNotes);
+export default withStyles(styles)(ClassDrawerLatest);

@@ -26,12 +26,15 @@ class ClassDrawerSeries extends React.PureComponent{
   //記事一覧を取得
   getSeries=()=>{
     Models.getSeries()
-      .then(response=>{
-        this.setState({series: response.series});
-      })
-      .catch(err=>{
-        console.log('Models.getSeries error');
-      })
+    .then(response=>{
+      this.setState({
+        series: response,
+        seriesTitle: response[0].title //初期状態で0番目のタイトルをセット
+      });
+    })
+    .catch(err=>{
+      console.log('Models.getSeries error');
+    })
   }
 
   //連載一覧の中のタイトルをクリックすると記事一覧に遷移
@@ -83,9 +86,6 @@ export default withStyles(styles)(ClassDrawerSeries);
 ///_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 class ClassSeries extends React.PureComponent{
-  state = {
-    series: null
-  }
 
   render(){
     let listItems = [];
@@ -123,12 +123,12 @@ class ClassArticles extends React.PureComponent{
   getArticles=()=>{
     const seriesId = this.props.seriesId;
     Models.getArticles(seriesId)
-      .then(response=>{
-        this.setState({articles: response.articles});
-      })
-      .catch(err=>{
-        console.log('Models.getArticles errror')
-      })
+    .then(response=>{
+      this.setState({articles: response});
+    })
+    .catch(err=>{
+      console.log('Models.getArticles errror')
+    })
   }
 
   componentDidMount(){
@@ -137,7 +137,6 @@ class ClassArticles extends React.PureComponent{
   }
 
   componentWillReceiveProps(){
-    //this.setState({seriesTitle: this.props.seriesTitle});
     this.getArticles();
   }
 

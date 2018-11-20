@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 
 import ClassDrawerSeries from './Drawer/DrawerSeries';
 import ClassDrawerNotes from './Drawer/DrawerNote';
+import ClassDrawerLatest from './Drawer/DrawerLatest';
 import Models from '../common/Models';
 
 const styles = {
@@ -77,6 +78,14 @@ class ClassDrawer extends React.Component {
                 />
               )}
             />
+            <Route //何も一致しなかった時
+              render={props=>(
+                <ClassDrawerLatest
+                  routeProps={props}
+                  appProps={this.props}
+                />
+              )}
+            />
           </Switch>
         </List>  
       </Drawer>
@@ -89,22 +98,3 @@ ClassDrawer.propTypes = {
 };
 
 export default withStyles(styles)(ClassDrawer);
-
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-///_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-
-class DrawerNote extends React.Component{
-  render(){
-    return(
-      <div/>
-    );
-  }
-}
-
-class DrawerAll extends React.Component{
-  render(){
-    return(
-      <div/>
-    );
-  }
-}

@@ -15,22 +15,22 @@ class ClassMain extends React.Component {
 
   getToppage=()=>{
     Models.getToppage()
-      .then(response=>{
-        this.setState({article: response.toppage});
-      })
-      .catch(err=>{
-        console.log('Models.getToppage error');
-      })
+    .then(response=>{
+      this.setState({article: response});
+    })
+    .catch(err=>{
+      console.log('Models.getToppage error');
+    })
   }
 
   getArticle=(timestamp)=>{
     Models.getArticle(timestamp)
-      .then(response=>{
-        this.setState({article: response.article});
-      })
-      .catch(err=>{
-        console.log('Models.getArticle error');
-      })
+    .then(response=>{
+      this.setState({article: response});
+    })
+    .catch(err=>{
+      console.log('Models.getArticle error');
+    })
   }
 
   // /blogならトップページ、/blog/:tab/:timestampなら記事取得
@@ -62,8 +62,6 @@ class ClassMain extends React.Component {
       window.hljs.initHighlighting();
     }
   }
-
-  
 
   render(){
     let backgroundImg = window.sessionStorage.getItem('backgroundImg');

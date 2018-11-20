@@ -26,6 +26,38 @@ class App extends Component {
     }
   }
 
+  setBackgroundImg=()=>{
+    window.sessionStorage.removeItem('backgroundImg');
+    const tab = window.location.pathname.split('/')[2];
+    switch(tab){
+      case 'series':
+        window.sessionStorage.backgroundImg = 'series';
+        break;
+      case 'notes':
+        window.sessionStorage.backgroundImg = 'note';
+        break;
+      case 'all':
+        window.sessionStorage.backgroundImg = 'all';
+        break;
+      default:
+        window.sessionStorage.backgroundImg = 'plain';
+        break;
+    }
+  }
+
+  checkMobile=()=>{
+    window.sessionStorage.removeItem('mobile');
+
+    if(document.body.clientWidth < 800){
+      this.setState({
+        paddingLeft: 0,
+        drawerOpen: false,
+        mobile: true,
+      });
+      window.sessionStorage.mobile = true;
+    }
+  }
+
   changeDrawerOpen=()=>{
     const paddingLeft = !this.state.drawerOpen && !this.state.mobile? 300: 0;
     
@@ -76,17 +108,14 @@ class App extends Component {
     this.setState({timestamp: timestamp});
   }
 
-  componentWillMount(){
-    window.sessionStorage.removeItem('mobile');
+  //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-    if(document.body.clientWidth < 800){
-      this.setState({
-        paddingLeft: 0,
-        drawerOpen: false,
-        mobile: true,
-      });
-      window.sessionStorage.mobile = true;
-    }
+  componentWillMount(){
+    //スマホorPC
+    this.checkMobile();
+
+    //背景色
+    this.setBackgroundImg();
   }
 
   render() {

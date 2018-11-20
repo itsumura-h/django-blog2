@@ -17,24 +17,27 @@ from .tables.Article import Article
 # API
 def get_toppage(request):
     toppage = Toppage.get_toppage()
-    return JsonResponse({'toppage': toppage})
+    return JsonResponse({'value': toppage})
 
 def get_series(request):
     series = Series.get_series()
-    return JsonResponse({'series': series})
+    return JsonResponse({'value': series})
 
 def get_notes(request):
     articles = Article.search_notes()
-    return JsonResponse({'articles': articles})
+    return JsonResponse({'value': articles})
 
 def get_articles(request, id=1):
     articles = Article.search_articles_by_series_id(id)
-    return JsonResponse({'articles': articles})
+    return JsonResponse({'value': articles})
 
 def get_article(request, timestamp=1539342522):
     article = Article.search_article_by_timestamp(timestamp)
-    return JsonResponse({'article': article})
+    return JsonResponse({'value': article})
 
+def get_latests(request):
+    articles = Article.search_latest_articles()
+    return JsonResponse({'value': articles})
 
 
 def test1(request, times=10):
@@ -87,6 +90,10 @@ def test2(request, times=1):
 
     return JsonResponse({'time': r_time, 'results': results})
 
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+
+def manifest(request):
+    return render(request, 'blog/build/manifest.json')
 
 class FrontendAppView(View):
     """
@@ -96,7 +103,7 @@ class FrontendAppView(View):
 
     def get(self, request):
         try:
-            with open(os.path.join(settings.BLOG_REACT_DIR, 'build', 'index.html')) as f:
+            with open(os.path.join(settings.BLOG_REACT_DIR, 'build/index.html')) as f:
                 return HttpResponse(f.read())
         except FileNotFoundError:
             logging.exception('Production build of app not found')
