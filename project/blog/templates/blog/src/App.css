@@ -43,7 +43,7 @@
   background-image:
     repeating-linear-gradient(45deg, #f33, #f33 30px, black 20px, black 40px);
 }
-.note{
+.notes{
   background-color: #fff !important;
   /*background-image: linear-gradient(90deg, orange 45%, white 45%, white 55%, orange 55%);*/
   background-image: linear-gradient(90deg, orange 45%, transparent 45%),

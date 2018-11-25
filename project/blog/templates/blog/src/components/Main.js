@@ -3,83 +3,42 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
+import {Switch, Route} from 'react-router-dom';
 //import from 'react-meta-tags';
 
-import Util from '../common/Util';
-import Models from '../common/Models';
+import MainAll from './Main/MainAll';
+import MainNormal from './Main/MainNormal';
 
 class ClassMain extends React.Component {
-  state = {
-    article: null
-  }
-
-  getToppage=()=>{
-    Models.getToppage()
-    .then(response=>{
-      this.setState({article: response});
-    })
-    .catch(err=>{
-      console.log('Models.getToppage error');
-    })
-  }
-
-  getArticle=(timestamp)=>{
-    Models.getArticle(timestamp)
-    .then(response=>{
-      this.setState({article: response});
-    })
-    .catch(err=>{
-      console.log('Models.getArticle error');
-    })
-  }
-
-  // /blogならトップページ、/blog/:tab/:timestampなら記事取得
-  getMainContent=()=>{
-    const timestamp = window.location.pathname.split('/')[3];
-
-    if(window.location.pathname === '/blog/'){
-      this.getToppage();
-    }else if(timestamp){
-      this.getArticle(timestamp);
-    }
-  }
-
-  componentDidMount(){
-    this.getMainContent();
-
-    if(document.getElementsByTagName('pre').length>0){
-      window.hljs.initHighlighting();
-    }
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.getMainContent();
-  }
-
-  componentDidUpdate(){
-    if(document.getElementsByTagName('pre').length>0){
-      window.hljs.initHighlighting.called = false;
-      window.hljs.initHighlighting();
-    }
-  }
 
   render(){
-    let backgroundImg = window.sessionStorage.getItem('backgroundImg');
-    backgroundImg = backgroundImg? backgroundImg: 'plain';
+    let backgroundImg = window.location.pathname.split('/')[2];
+    if(!backgroundImg || backgroundImg === 'latest'){
+      backgroundImg = 'plain';
+    }
 
-    const article_html = this.state.article? this.state.article.article_html: '';
-
-    return(
-      <Card className={backgroundImg}>
-        <Card
-          className={this.props.classes.main}
-          raised={true}
-          dangerouslySetInnerHTML={
-            {__html: article_html} }
-        >
-        </Card>
-      </Card>
-    );
+   return(
+    <Card className={backgroundImg}>
+      <Switch>
+        <Route path="/blog/all"
+          render={props=>(
+            <MainAll
+              routeProps={props}
+              appProps={this.props}
+            />
+          )}
+        />
+        <Route
+          render={props=>(
+            <MainNormal
+              routeProps={props}
+              appProps={this.props}
+            />
+          )}
+        />
+      </Switch>
+    </Card>
+   );
   }
 }
 

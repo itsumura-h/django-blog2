@@ -1,9 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import List from '@material-ui/core/List';
+//import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -136,8 +135,10 @@ class ClassArticles extends React.PureComponent{
     this.getArticles();
   }
 
-  componentWillReceiveProps(){
-    this.getArticles();
+  componentDidUpdate(nextProps){
+    if(this.props !== nextProps){
+      this.getArticles();
+    }
   }
 
   render(){

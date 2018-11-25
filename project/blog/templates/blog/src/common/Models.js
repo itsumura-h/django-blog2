@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import CONST from './Const';
+//import CONST from './Const';
 import Util from './Util';
 
 export default class Models extends React.Component{

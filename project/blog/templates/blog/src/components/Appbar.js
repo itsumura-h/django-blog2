@@ -12,13 +12,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 class ClassAppBar extends React.Component {
   titleClick=()=>{
-    window.sessionStorage.removeItem('backgroundImg');
-    window.sessionStorage.backgroundImg = 'plain';
+    this.props.clickTab('plain');
   }
 
   render(){
-    let backgroundImg = window.sessionStorage.getItem('backgroundImg');
-    backgroundImg = backgroundImg? backgroundImg: 'plain';
+    let backgroundImg = window.location.pathname.split('/')[2];
+    if(!backgroundImg || backgroundImg === 'latest'){
+      backgroundImg = 'plain';
+    }
 
     const mobile = window.sessionStorage.getItem('mobile');
     const marquee = mobile? 'marquee': '';

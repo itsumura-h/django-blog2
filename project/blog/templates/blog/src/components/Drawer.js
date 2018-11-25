@@ -2,24 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import Drawer from '@material-ui/core/Drawer';
 
 import  Close from '@material-ui/icons/Close';
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-
 import ClassDrawerSeries from './Drawer/DrawerSeries';
 import ClassDrawerNotes from './Drawer/DrawerNote';
 import ClassDrawerLatest from './Drawer/DrawerLatest';
-import Models from '../common/Models';
 
 const styles = {
   DrawerStyle: {
@@ -33,14 +29,19 @@ class ClassDrawer extends React.Component {
   state = {
     value: 0,
     series: null,
-    seriesArg: null
+    seriesArg: null,
   };
 
   render() {
-    const docked = this.props.mobile ? "temporary" : "persistent";
+    let docked = this.props.mobile ? "temporary" : "persistent";
+    if(window.location.pathname.split('/')[2] === 'all'){
+      docked = "persistent";
+    }
 
-    let backgroundImg = window.sessionStorage.getItem('backgroundImg');
-    backgroundImg = backgroundImg ? backgroundImg : 'plain';
+    let backgroundImg = window.location.pathname.split('/')[2];
+    if(!backgroundImg || backgroundImg === 'latest'){
+      backgroundImg = 'plain';
+    }
 
     return (
       <Drawer

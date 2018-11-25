@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import CONST from './Const';
-import zIndex from '@material-ui/core/styles/zIndex';
+//import zIndex from '@material-ui/core/styles/zIndex';
 
 export default class Util extends React.Component{
   static method1 = (arg1, arg2) => {
@@ -10,17 +10,22 @@ export default class Util extends React.Component{
 
   static getAPI=(url)=>{
     url = CONST.APIHOST + url;
-    let val = JSON.parse(sessionStorage.getItem(url));
+    const val = sessionStorage.getItem(url);
+
     if(val){
       return new Promise(function(resolve, reject) {
-        resolve(val);
+        resolve(JSON.parse(val));
       });
     }else{
       return axios
         .get(url, CONST.APIMODE)
         .then(response=>{
-          sessionStorage.setItem(url, JSON.stringify(response.data.value));
-          return response.data.value;
+          if(response.data.value === undefined){
+            window.location.href = '/blog/';
+          }else{
+            sessionStorage.setItem(url, JSON.stringify(response.data.value));
+            return response.data.value;
+          }
         })
         .catch(err=>{
           console.error(err);

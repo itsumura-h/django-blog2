@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import ClassAppBar from './components/Appbar';
 import ClassDrawer from './components/Drawer';
@@ -23,25 +23,6 @@ class App extends Component {
       mobile: false,
       tab: '',
       timestamp: null,
-    }
-  }
-
-  setBackgroundImg=()=>{
-    window.sessionStorage.removeItem('backgroundImg');
-    const tab = window.location.pathname.split('/')[2];
-    switch(tab){
-      case 'series':
-        window.sessionStorage.backgroundImg = 'series';
-        break;
-      case 'notes':
-        window.sessionStorage.backgroundImg = 'note';
-        break;
-      case 'all':
-        window.sessionStorage.backgroundImg = 'all';
-        break;
-      default:
-        window.sessionStorage.backgroundImg = 'plain';
-        break;
     }
   }
 
@@ -67,7 +48,31 @@ class App extends Component {
     });
   }
 
-  tab_changeDrawerOpen=()=>{
+  closeDrawer=()=>{
+    if(window.location.pathname.match('/all/')){
+      this.setState({
+        drawerOpen: false,
+        paddingLeft: 0
+      });
+    }/*else{
+      this.drawer_changeDrawerOpen();
+    }*/
+  }
+
+  drawer_changeDrawerOpen=()=>{
+    const paddingLeft = !this.state.drawerOpen && !this.state.mobile? 300: 0;
+
+    if(this.state.mobile){
+      this.setState({
+        drawerOpen: !this.state.drawerOpen,
+        paddingLeft: paddingLeft
+      });
+    }
+  }
+
+  clickTab=(tab)=>{
+    this.setState({tab: tab});
+
     if(this.state.mobile){
       this.setState({
         drawerOpen: true
@@ -80,28 +85,6 @@ class App extends Component {
     }
   }
 
-  drawer_changeDrawerOpen=()=>{
-    const paddingLeft = !this.state.drawerOpen && !this.state.mobile? 300: 0;
-
-    if(this.state.mobile){
-      this.setState({
-        drawerOpen: !this.state.drawerOpen,
-        paddingLeft: paddingLeft
-      });
-    }else{
-      this.setState({
-        drawerOpen: true,
-        paddingLeft: 300
-      });
-    }
-  }
-
-  clickTab=(tab)=>{
-    this.setState({tab: tab});
-
-    this.tab_changeDrawerOpen();
-  }
-
   //ドロワークリック→記事表示
   getArticle=(e)=>{
     const timestamp = e.currentTarget.getAttribute('data-article-timestamp');
@@ -110,12 +93,19 @@ class App extends Component {
 
   //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-  componentWillMount(){
+  componentDidMount(){
     //スマホorPC
     this.checkMobile();
 
-    //背景色
-    this.setBackgroundImg();
+    // /all以下の時はDrawerを表示しない
+    this.closeDrawer();
+  }
+
+  componentDidUpdate(){
+    // 「/all」以下の時はDrawerを表示しない
+    if(this.state.drawerOpen){
+      this.closeDrawer();
+    }
   }
 
   render() {
@@ -133,6 +123,7 @@ class App extends Component {
           <div className="rightContents" style={{paddingLeft: this.state.paddingLeft}}>
             <ClassAppBar
               changeDrawerOpen={this.changeDrawerOpen} //開閉する関数
+              clickTab={this.clickTab}
             />
             <ClassTabs
               clickTab={this.clickTab}

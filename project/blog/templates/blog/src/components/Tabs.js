@@ -11,31 +11,31 @@ import Typography from '@material-ui/core/Typography';
 
 class ClassTabs extends React.Component {
   linkClick=(e)=>{
-    window.sessionStorage.removeItem('backgroundImg');
     const data_tab = e.currentTarget.getAttribute('data-tab');
-    window.sessionStorage.backgroundImg = data_tab;
-
     this.props.clickTab(data_tab);
   }
 
   render() {
     const { classes } = this.props;
-    let backgroundImg = window.sessionStorage.getItem('backgroundImg');
-    backgroundImg = backgroundImg? backgroundImg: 'plain';
+
+    let backgroundImg = window.location.pathname.split('/')[2];
+    if(!backgroundImg || backgroundImg === 'latest'){
+      backgroundImg = 'plain';
+    }
 
     return (
       <div>
         <AppBar position="static" className={backgroundImg}>
           <Tabs 
             value={false}
-            fullWidth
             scrollable
             scrollButtons="auto"
+            fullWidth
           >
-            <Link to="/blog/series/" onClick={this.linkClick} data-tab="series" fullwidth="false">
+            <Link to="/blog/series/" onClick={this.linkClick} data-tab="series">
               <Tab label="連載記事" className={classes.series + ' Tab'}/>
             </Link>
-            <Link to="/blog/notes/" onClick={this.linkClick} data-tab="note">
+            <Link to="/blog/notes/" onClick={this.linkClick} data-tab="notes">
               <Tab label="雑記" className={classes.note + ' Tab'}/>
             </Link>
             <Link to="/blog/all/" onClick={this.linkClick} data-tab="all">

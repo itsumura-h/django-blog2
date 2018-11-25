@@ -1,12 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import List from '@material-ui/core/List';
+//import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import FibernewIcon from '@material-ui/icons/FiberNew'
 
 import Models from '../../common/Models';
@@ -20,7 +18,6 @@ class ClassDrawerLatest extends React.PureComponent {
   getLatests=()=>{
     Models.getLatests()
     .then(response=>{
-      console.log(response);
       this.setState({articles: response});
     })
     .catch(err=>{

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
 from django.conf import settings
 
 import os
@@ -19,29 +19,41 @@ def get_toppage(request):
     toppage = Toppage.get_toppage()
     return JsonResponse({'value': toppage})
 
+
 def get_series(request):
     series = Series.get_series()
     return JsonResponse({'value': series})
+
 
 def get_notes(request):
     articles = Article.search_notes()
     return JsonResponse({'value': articles})
 
+
 def get_articles(request, id=1):
     articles = Article.search_articles_by_series_id(id)
     return JsonResponse({'value': articles})
 
+
 def get_article(request, timestamp=1539342522):
     article = Article.search_article_by_timestamp(timestamp)
     return JsonResponse({'value': article})
+
 
 def get_latests(request):
     articles = Article.search_latest_articles()
     return JsonResponse({'value': articles})
 
 
+def error(request):
+    print('error')
+    return HttpResponseNotFound('<h1>API not found</h1>')
+
+#_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 def test1(request, times=10):
     responce = {}
+    times = 100000 if times > 100000 else times
 
     start = time.time()
     # -----------------------------------------
@@ -73,6 +85,7 @@ def test1(request, times=10):
 
     responce['results'] = results
     return  JsonResponse(responce)
+
 
 def test2(request, times=1):
     def fib(n):
