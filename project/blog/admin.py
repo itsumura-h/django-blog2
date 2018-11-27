@@ -10,7 +10,7 @@ admin.site.register(Toppage, ToppageAdmin)
 admin.site.register(Series)
 
 class ArticleAdmin(admin.ModelAdmin):
-    readonly_fields = ['article_html', 'article_html_en', 'timestamp']
+    readonly_fields = ['article_html', 'article_html_en', 'timestamp', 'posted_on', 'updated_on']
     list_display = ('title', 'timestamp')
 admin.site.register(Article, ArticleAdmin)
 

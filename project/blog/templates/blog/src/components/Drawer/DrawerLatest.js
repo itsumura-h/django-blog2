@@ -10,6 +10,8 @@ import FibernewIcon from '@material-ui/icons/FiberNew'
 import Models from '../../common/Models';
 import Link from 'react-router-dom/Link';
 
+import I18N from '../../common/I18N';
+
 class ClassDrawerLatest extends React.PureComponent {
   state = {
     articles: null
@@ -52,7 +54,7 @@ class ClassDrawerLatest extends React.PureComponent {
           <ListItemIcon>
             <FibernewIcon />
           </ListItemIcon>
-          <ListItemText primary="新着20件" />
+          <ListItemText primary={I18N.latest20} />
         </ListItem>
         {articles}
       </div>

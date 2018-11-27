@@ -20,7 +20,7 @@ class ClassMain extends React.Component {
    return(
     <Card className={backgroundImg}>
       <Switch>
-        <Route path="/blog/all"
+        <Route exact path="/blog/all/"
           render={props=>(
             <MainAll
               routeProps={props}

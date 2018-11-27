@@ -9,6 +9,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
+import I18N from '../common/I18N';
+
 class ClassTabs extends React.Component {
   linkClick=(e)=>{
     const data_tab = e.currentTarget.getAttribute('data-tab');
@@ -24,26 +26,24 @@ class ClassTabs extends React.Component {
     }
 
     return (
-      <div>
-        <AppBar position="static" className={backgroundImg}>
-          <Tabs 
-            value={false}
-            scrollable
-            scrollButtons="auto"
-            fullWidth
-          >
-            <Link to="/blog/series/" onClick={this.linkClick} data-tab="series">
-              <Tab label="連載記事" className={classes.series + ' Tab'}/>
-            </Link>
-            <Link to="/blog/notes/" onClick={this.linkClick} data-tab="notes">
-              <Tab label="雑記" className={classes.note + ' Tab'}/>
-            </Link>
-            <Link to="/blog/all/" onClick={this.linkClick} data-tab="all">
-              <Tab label="全記事一覧" className={classes.all + ' Tab'}/>
-            </Link>
-          </Tabs>
-        </AppBar>
-      </div>
+      <AppBar position="static" className={backgroundImg}>
+        <Tabs 
+          value={false}
+          scrollable
+          scrollButtons="auto"
+          fullWidth
+        >
+          <Link to="/blog/series/" onClick={this.linkClick} data-tab="series">
+            <Tab label={I18N.series} className={classes.series + ' Tab'}/>
+          </Link>
+          <Link to="/blog/notes/" onClick={this.linkClick} data-tab="notes">
+            <Tab label={I18N.notes} className={classes.note + ' Tab'}/>
+          </Link>
+          <Link to="/blog/all/" onClick={this.linkClick} data-tab="all">
+            <Tab label={I18N.allArticles} className={classes.all + ' Tab'}/>
+          </Link>
+        </Tabs>
+      </AppBar>
     );
   }
 }

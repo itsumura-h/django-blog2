@@ -6,9 +6,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Link from 'react-router-dom/Link';
 
 import Models from '../../common/Models';
-import Link from 'react-router-dom/Link';
+import I18N from '../../common/I18N';
 
 class ClassDrawerSeries extends React.PureComponent{
   state = {
@@ -56,8 +57,8 @@ class ClassDrawerSeries extends React.PureComponent{
     return (
       <div>
         <Tabs value={this.state.value} onChange={this.changeTabDefault} fullWidth>
-          <Tab label="連載一覧" />
-          <Tab label="記事一覧" />
+          <Tab label={I18N.seriesList} />
+          <Tab label={I18N.articlesList} />
         </Tabs>
         {this.state.value === 0 &&
           <ClassSeries //連載一覧
@@ -160,10 +161,15 @@ class ClassArticles extends React.PureComponent{
       );
     }
 
+    let articlesOf = seriesTitle + I18N.articlesOf;
+    if(window.localStorage.getItem('language') === 'en'){
+      articlesOf = I18N.articlesOf + seriesTitle;
+    }
+
     return (
       <div>
         <ListItem>
-          <ListItemText primary={seriesTitle + "の記事一覧"}/>
+          <ListItemText primary={articlesOf}/>
         </ListItem>
         {articles}
       </div>

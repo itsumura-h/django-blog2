@@ -54,9 +54,7 @@ class App extends Component {
         drawerOpen: false,
         paddingLeft: 0
       });
-    }/*else{
-      this.drawer_changeDrawerOpen();
-    }*/
+    }
   }
 
   drawer_changeDrawerOpen=()=>{

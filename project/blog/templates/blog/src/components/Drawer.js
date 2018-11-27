@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import { Route, Switch } from 'react-router-dom'
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import Drawer from '@material-ui/core/Drawer';
-
 import  Close from '@material-ui/icons/Close';
+
+import { Route, Switch } from 'react-router-dom'
 
 import ClassDrawerSeries from './Drawer/DrawerSeries';
 import ClassDrawerNotes from './Drawer/DrawerNote';
 import ClassDrawerLatest from './Drawer/DrawerLatest';
+
+import I18N from '../common/I18N';
 
 const styles = {
   DrawerStyle: {
@@ -43,9 +43,14 @@ class ClassDrawer extends React.Component {
       backgroundImg = 'plain';
     }
 
+    let drawerOpen = this.props.drawerOpen;
+    if(window.location.pathname.match('/all/')){
+      drawerOpen = false;
+    }
+
     return (
       <Drawer
-      open={this.props.drawerOpen}
+      open={drawerOpen}
       variant={docked}
       classes={{paper: backgroundImg}}
       className="Drawer"
@@ -60,7 +65,7 @@ class ClassDrawer extends React.Component {
           <ListItemIcon>
             <Close />
           </ListItemIcon>
-          <ListItemText inset primary="閉じる" />
+          <ListItemText inset primary={I18N.closeButtonName} />
         </ListItem>
           <Switch>
             <Route path="/blog/series"

@@ -34,10 +34,11 @@ class MainNormal extends React.Component {
   getMainContent=()=>{
     const timestamp = window.location.pathname.split('/')[3];
 
-    if(window.location.pathname === `/blog/` || !this.state.article){
-      this.getToppage();
-    }else if(timestamp){
+    if(timestamp){
       this.getArticle(timestamp);
+    }
+    else if(window.location.pathname === `/blog/` || !this.state.article){
+      this.getToppage();
     }
   }
 

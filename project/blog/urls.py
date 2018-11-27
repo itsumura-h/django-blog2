@@ -4,11 +4,25 @@ from . import views
 
 api_patterns = [
     path('getToppage', views.get_toppage),
+    path('getToppage_en', views.get_toppage_en),
+    
     path('getSeries', views.get_series),
+    path('getSeries_en', views.get_series_en),
+
     path('getNotes', views.get_notes),
+    path('getNotes_en', views.get_notes_en),
+
     path('getArticles/<int:id>', views.get_articles),
+    path('getArticles_en/<int:id>', views.get_articles_en),
+
     path('getArticle/<int:timestamp>', views.get_article),
+    path('getArticle_en/<int:timestamp>', views.get_article_en),
+
     path('getLatests', views.get_latests),
+    path('getLatests_en', views.get_latests_en),
+    
+    path('getAllArticles', views.get_all_articles),
+    path('getAllArticles_en', views.get_all_articles_en),
     
     path('test1/<int:times>', views.test1),
     path('test2/<int:times>', views.test2),

@@ -12,6 +12,10 @@ from .tables.Toppage import Toppage
 from .tables.Series import Series
 from .tables.Article import Article
 
+#デバッグ
+import pdb #pdb.set_trace()
+import json
+
 # Create your views here.
 
 # API
@@ -19,35 +23,91 @@ def get_toppage(request):
     toppage = Toppage.get_toppage()
     return JsonResponse({'value': toppage})
 
-
+def get_toppage_en(request):
+    toppage = Toppage.get_toppage_en()
+    return JsonResponse({'value': toppage})
+#----------------------------------------------
 def get_series(request):
     series = Series.get_series()
     return JsonResponse({'value': series})
 
-
+def get_series_en(request):
+    series = Series.get_series_en()
+    return JsonResponse({'value': series})
+#----------------------------------------------
 def get_notes(request):
     articles = Article.search_notes()
     return JsonResponse({'value': articles})
 
-
+def get_notes_en(request):
+    articles = Article.search_notes_en()
+    return JsonResponse({'value': articles})
+#----------------------------------------------
 def get_articles(request, id=1):
     articles = Article.search_articles_by_series_id(id)
     return JsonResponse({'value': articles})
 
-
+def get_articles_en(request, id=1):
+    articles = Article.search_articles_by_series_id_en(id)
+    return JsonResponse({'value': articles})
+#----------------------------------------------
 def get_article(request, timestamp=1539342522):
     article = Article.search_article_by_timestamp(timestamp)
     return JsonResponse({'value': article})
 
-
+def get_article_en(request, timestamp=1539342522):
+    article = Article.search_article_by_timestamp_en(timestamp)
+    return JsonResponse({'value': article})
+#----------------------------------------------
 def get_latests(request):
     articles = Article.search_latest_articles()
     return JsonResponse({'value': articles})
 
+def get_latests_en(request):
+    articles = Article.search_latest_articles_en()
+    return JsonResponse({'value': articles})
+#----------------------------------------------
+from .service import Service
+def get_all_articles(request):
+    articles = Article.search_all_articles()
+    list_series = Service.all_articles_to_hierarchy(articles)
+    #print(json.dumps(list_series, indent=2, ensure_ascii=False))
+    return JsonResponse({'value': list_series})
 
+def get_all_articles_en(request):
+    articles = Article.search_all_articles_en()
+    list_series = Service.all_articles_to_hierarchy(articles)
+    #print(json.dumps(list_series, indent=2, ensure_ascii=False))
+    return JsonResponse({'value': list_series})
+#----------------------------------------------
 def error(request):
-    print('error')
     return HttpResponseNotFound('<h1>API not found</h1>')
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+
+def manifest(request):
+    return render(request, 'blog/build/manifest.json')
+
+class FrontendAppView(View):
+    """
+    Serves the compiled frontend entry point (only works if you have run `yarn
+    run build`).
+    """
+
+    def get(self, request):
+        try:
+            with open(os.path.join(settings.BLOG_REACT_DIR, 'build/index.html')) as f:
+                return HttpResponse(f.read())
+        except FileNotFoundError:
+            logging.exception('Production build of app not found')
+            return HttpResponse(
+                """
+                This URL is only used when you have built the production
+                version of the app. Visit http://localhost:3000/ instead, or
+                run `yarn run build` to test the production version.
+                """,
+                status=501,
+            )
 
 #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -102,29 +162,3 @@ def test2(request, times=1):
     r_time = time.time() - start
 
     return JsonResponse({'time': r_time, 'results': results})
-
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-
-def manifest(request):
-    return render(request, 'blog/build/manifest.json')
-
-class FrontendAppView(View):
-    """
-    Serves the compiled frontend entry point (only works if you have run `yarn
-    run build`).
-    """
-
-    def get(self, request):
-        try:
-            with open(os.path.join(settings.BLOG_REACT_DIR, 'build/index.html')) as f:
-                return HttpResponse(f.read())
-        except FileNotFoundError:
-            logging.exception('Production build of app not found')
-            return HttpResponse(
-                """
-                This URL is only used when you have built the production
-                version of the app. Visit http://localhost:3000/ instead, or
-                run `yarn run build` to test the production version.
-                """,
-                status=501,
-            )
