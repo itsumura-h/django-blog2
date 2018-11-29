@@ -5,10 +5,13 @@ const ja = {
   seriesList: '連載一覧',
   articlesList: '記事一覧',
   articlesOf: 'の記事一覧',
-  series: '連載一覧',
-  notes: '雑記一覧',
-  allArticles: '全記事一覧',
-  notesWithClick: '雑記(クリックで開く)',
+  seriesTab: '連載一覧',
+  diariesTab: '雑記一覧',
+  searchTab: '検索',
+  allTab: '全記事一覧',
+  drawerSearchLabel: '検索ワード',
+  drawerSearchButton: '検索',
+  diariesWithClick: '雑記(クリックで開く)',
 }
 
 const en = {
@@ -18,10 +21,13 @@ const en = {
   seriesList: 'Series List',
   articlesList: 'Articles List',
   articlesOf: 'Articles of ',
-  series: 'Series',
-  notes: 'Notes',
-  allArticles: 'All articles',
-  notesWithClick: 'Notes(Click here to open)',
+  seriesTab: 'Series',
+  diariesTab: 'Diaries',
+  allTab: 'All articles',
+  searchTab: 'Search',
+  drawerSearchLabel: 'search word',
+  drawerSearchButton: 'search',
+  diariesWithClick: 'Diaries(Click here to open)',
 }
 
 let I18N = null;

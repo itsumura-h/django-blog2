@@ -4,27 +4,28 @@ import { withStyles } from '@material-ui/core/styles';
 //import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
-import Models from '../../common/Models';
 import Link from 'react-router-dom/Link';
 
-class ClassDrawerNotes extends React.PureComponent {
+import Models from '../../common/Models';
+
+class ClassDrawerDiary extends React.PureComponent {
   state = {
-    articles: null
+    articles: null,
+    error: false,
   }
   
-  getNotes=()=>{
-    Models.getNotes()
+  getDiaries=()=>{
+    Models.getDiaries()
     .then(response=>{
       this.setState({articles: response});
     })
     .catch(err=>{
-      console.log('Models.getNotes() error');
+      console.log('Models.getDiaries() error');
     })
   }
   
   componentDidMount(){
-    this.getNotes();
+    this.getDiaries();
   }
 
   render() {
@@ -33,7 +34,7 @@ class ClassDrawerNotes extends React.PureComponent {
       articles.push(
         <Link
           key={i}
-          to={"/blog/notes/"+this.state.articles[i].timestamp}
+          to={"/blog/diary/"+this.state.articles[i].timestamp}
         >
           <ListItem button
             onClick={this.props.appProps.drawer_changeDrawerOpen}
@@ -42,7 +43,7 @@ class ClassDrawerNotes extends React.PureComponent {
           </ListItem>
         </Link>
       )
-    }
+    }    
 
     return (
       <div>
@@ -53,4 +54,4 @@ class ClassDrawerNotes extends React.PureComponent {
 }
 
 const styles = {}
-export default withStyles(styles)(ClassDrawerNotes);
+export default withStyles(styles)(ClassDrawerDiary);

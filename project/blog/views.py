@@ -35,27 +35,27 @@ def get_series_en(request):
     series = Series.get_series_en()
     return JsonResponse({'value': series})
 #----------------------------------------------
-def get_notes(request):
-    articles = Article.search_notes()
+def get_diaries(request):
+    articles = Article.search_diaries()
     return JsonResponse({'value': articles})
 
-def get_notes_en(request):
-    articles = Article.search_notes_en()
+def get_diaries_en(request):
+    articles = Article.search_diaries_en()
     return JsonResponse({'value': articles})
 #----------------------------------------------
-def get_articles(request, id=1):
-    articles = Article.search_articles_by_series_id(id)
+def get_articles(request, series_id=1):
+    articles = Article.search_articles_by_series_id(series_id)
     return JsonResponse({'value': articles})
 
-def get_articles_en(request, id=1):
-    articles = Article.search_articles_by_series_id_en(id)
+def get_articles_en(request, series_id=1):
+    articles = Article.search_articles_by_series_id_en(series_id)
     return JsonResponse({'value': articles})
 #----------------------------------------------
-def get_article(request, timestamp=1539342522):
+def get_article(request, timestamp=1):
     article = Article.search_article_by_timestamp(timestamp)
     return JsonResponse({'value': article})
 
-def get_article_en(request, timestamp=1539342522):
+def get_article_en(request, timestamp=1):
     article = Article.search_article_by_timestamp_en(timestamp)
     return JsonResponse({'value': article})
 #----------------------------------------------
@@ -79,6 +79,20 @@ def get_all_articles_en(request):
     list_series = Service.all_articles_to_hierarchy(articles)
     #print(json.dumps(list_series, indent=2, ensure_ascii=False))
     return JsonResponse({'value': list_series})
+#----------------------------------------------
+def getArticlesByKeyword(request, keyword):
+    if keyword is '':
+        return JsonResponse({'value': ''})
+
+    articles = Article.searchArticlesByKeyword(keyword)
+    return JsonResponse({'value': articles})
+
+def getArticlesByKeyword_en(request, keyword):
+    if keyword is '':
+        return JsonResponse({'value': ''})
+
+    articles = Article.searchArticlesByKeyword_en(keyword)
+    return JsonResponse({'value': articles})
 #----------------------------------------------
 def error(request):
     return HttpResponseNotFound('<h1>API not found</h1>')

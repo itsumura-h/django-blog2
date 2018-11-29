@@ -34,13 +34,16 @@ class ClassTabs extends React.Component {
           fullWidth
         >
           <Link to="/blog/series/" onClick={this.linkClick} data-tab="series">
-            <Tab label={I18N.series} className={classes.series + ' Tab'}/>
+            <Tab label={I18N.seriesTab} className={classes.series + ' Tab'}/>
           </Link>
-          <Link to="/blog/notes/" onClick={this.linkClick} data-tab="notes">
-            <Tab label={I18N.notes} className={classes.note + ' Tab'}/>
+          <Link to="/blog/diary/" onClick={this.linkClick} data-tab="diary">
+            <Tab label={I18N.diariesTab} className={classes.diary + ' Tab'}/>
+          </Link>
+          <Link to="/blog/search/" onClick={this.linkClick} data-tab="search">
+            <Tab label={I18N.searchTab} className={classes.search + ' Tab'}/>
           </Link>
           <Link to="/blog/all/" onClick={this.linkClick} data-tab="all">
-            <Tab label={I18N.allArticles} className={classes.all + ' Tab'}/>
+            <Tab label={I18N.allTab} className={classes.all + ' Tab'}/>
           </Link>
         </Tabs>
       </AppBar>
@@ -68,14 +71,14 @@ const styles = {
   series: {
     backgroundColor: '#f33',
   },
-  note: {
+  diary: {
     backgroundColor: 'orange',
   },
   all: {
-    backgroundColor: 'green',
-  },
-  native: {
     backgroundColor: '#33f',
+  },
+  search: {
+    backgroundColor: 'green',
   },
   management: {
     backgroundColor: 'purple',

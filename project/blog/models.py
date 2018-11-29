@@ -107,6 +107,9 @@ class Tag(models.Model):
         verbose_name_plural = 'tag'
 
 class Tagmap(models.Model):
+    def __str__(self):
+        return str(self.tag) + ' ―― ' + str(self.article)
+
     tag = models.ForeignKey(Tag, on_delete=models.PROTECT)
     article = models.ForeignKey(Article, on_delete=models.PROTECT)
 

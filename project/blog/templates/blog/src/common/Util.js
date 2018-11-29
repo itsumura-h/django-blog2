@@ -33,6 +33,23 @@ export default class Util extends React.Component{
     }
   }
 
+  static getAPIWithoutCache=(url)=>{
+    url = CONST.APIHOST + url;
+
+    return axios
+      .get(url, CONST.APIMODE)
+      .then(response=>{
+        if(response.data.value === undefined){
+          window.location.href = '/blog/';
+        }else{
+          return response.data.value;
+        }
+      })
+      .catch(err=>{
+        console.error(err);
+      })
+  }
+
   static postAPI=(url)=>{
     url = CONST.APIHOST + url;
     return axios

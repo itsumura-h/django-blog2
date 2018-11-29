@@ -69,7 +69,7 @@ class MainAll extends React.Component {
         //雑記の時
         series.push(
           <details>
-            <summary><h2>{I18N.notesWithClick}</h2></summary>
+            <summary><h2>{I18N.diariesWithClick}</h2></summary>
               {article}
           </details>
         );

@@ -31,28 +31,28 @@ export default class Models extends React.Component{
   }
 
 
-  static getNotes=()=>{
+  static getDiaries=()=>{
     const language = window.localStorage.getItem('language');
     let url;
 
     if(language === 'ja' || !language){
-      url = '/blog/api/getNotes';
+      url = '/blog/api/getDiaries';
     }else{
-      url = '/blog/api/getNotes_en';
+      url = '/blog/api/getDiaries_en';
     }
 
     return Util.getAPI(url);
   }
 
 
-  static getArticles=(id)=>{
+  static getArticles=(series_id)=>{
     const language = window.localStorage.getItem('language');
     let url;
 
     if(language === 'ja' || !language){
-      url = '/blog/api/getArticles/' + id;
+      url = '/blog/api/getArticles/' + series_id;
     }else{
-      url = '/blog/api/getArticles_en/' + id;
+      url = '/blog/api/getArticles_en/' + series_id;
     }
 
     return Util.getAPI(url);
@@ -98,5 +98,19 @@ export default class Models extends React.Component{
     }
 
     return Util.getAPI(url);
+  }
+
+
+  static getArticlesByKeyword=(keyword)=>{
+    const language = window.localStorage.getItem('language');
+    let url;
+
+    if(language === 'ja' || !language){
+      url = '/blog/api/getArticlesByKeyword/' + keyword;
+    }else{
+      url = '/blog/api/getArticlesByKeyword_en/' + keyword;
+    }
+
+    return Util.getAPIWithoutCache(url);
   }
 }

@@ -12,8 +12,9 @@ import  Close from '@material-ui/icons/Close';
 import { Route, Switch } from 'react-router-dom'
 
 import ClassDrawerSeries from './Drawer/DrawerSeries';
-import ClassDrawerNotes from './Drawer/DrawerNote';
+import ClassDrawerDiary from './Drawer/DrawerDiary';
 import ClassDrawerLatest from './Drawer/DrawerLatest';
+import ClassDrawerSearch from './Drawer/DrawerSearch';
 
 import I18N from '../common/I18N';
 
@@ -76,9 +77,17 @@ class ClassDrawer extends React.Component {
                 />
               )}
             />
-            <Route path="/blog/notes"
+            <Route path="/blog/diary"
               render={props=>(
-                <ClassDrawerNotes
+                <ClassDrawerDiary
+                  routeProps={props}
+                  appProps={this.props}
+                />
+              )}
+            />
+            <Route path="/blog/search"
+              render={props=>(
+                <ClassDrawerSearch
                   routeProps={props}
                   appProps={this.props}
                 />
