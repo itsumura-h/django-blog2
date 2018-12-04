@@ -21,7 +21,7 @@ class Article(Model):
             .serialize()
     #-----------------------------------------------------------
     @staticmethod
-    def search_notes():
+    def search_diaries():
         return Article.select('title', 'timestamp') \
             .where_null('series_id') \
             .order_by('timestamp', 'desc') \
@@ -30,7 +30,7 @@ class Article(Model):
             .serialize()
 
     @staticmethod
-    def search_notes_en():
+    def search_diaries_en():
         return Article.select('title_en as title', 'timestamp') \
             .where_null('series_id') \
             .order_by('timestamp', 'desc') \
@@ -84,7 +84,6 @@ class Article(Model):
             .get() \
             .serialize()
     #-----------------------------------------------------------
-
     @staticmethod
     def search_all_articles():
         """
@@ -107,7 +106,7 @@ class Article(Model):
                 'articles.timestamp'
             ) \
             .left_join('series', 'articles.series_id', '=', 'series.id') \
-            .order_by('series.id', 'asc', ) \
+            .order_by('series.id', 'asc') \
             .order_by('articles.id', 'asc') \
             .get() \
             .serialize()
@@ -128,7 +127,56 @@ class Article(Model):
             .order_by('articles.id', 'asc') \
             .get() \
             .serialize()
+    #-----------------------------------------------------------
+    @staticmethod
+    def search_articles_by_keyword(keyword):
+        return Article \
+            .select(
+                'title',
+                'timestamp'
+            ) \
+            .where('article_md', 'like', '%'+keyword+'%') \
+            .get() \
+            .serialize()
+        #print(json.dumps(a, indent=2, ensure_ascii=False))
 
+    @staticmethod
+    def search_articles_by_keyword_en(keyword):
+        return Article \
+            .select(
+                'title_en as title',
+                'timestamp'
+            ) \
+            .where('article_md_en', 'like', '%'+keyword+'%') \
+            .get() \
+            .serialize()
+    #-----------------------------------------------------------
+    @staticmethod
+    def search_articles_by_tag_id(tag_id):
+        return Article \
+            .select(
+                'tags.tag',
+                'articles.title',
+                'articles.timestamp'
+            ) \
+            .left_join('tagmaps', 'articles.id', '=', 'tagmaps.article_id') \
+            .left_join('tags', 'tagmaps.tag_id', '=', 'tags.id') \
+            .where('tags.id', '=', tag_id) \
+            .get() \
+            .serialize()
+
+    def search_articles_by_tag_id_en(tag_id):
+        return Article \
+            .select(
+                'tags.tag_en as tag',
+                'articles.title_en as title',
+                'articles.timestamp'
+            ) \
+            .left_join('tagmaps', 'articles.id', '=', 'tagmaps.article_id') \
+            .left_join('tags', 'tagmaps.tag_id', '=', 'tags.id') \
+            .where('tags.id', '=', tag_id) \
+            .get() \
+            .serialize()
     #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
     @staticmethod

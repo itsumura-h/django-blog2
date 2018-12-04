@@ -100,7 +100,7 @@ class ClassDrawerSearch extends React.PureComponent {
       )
     }
 
-    let explain = [];
+    let explain;
     const isWord = window.location.search.slice(1).match(/word/)? true: false;
     const isTag = window.location.search.slice(1).match(/tag/)? true: false;
     let resultOf;
@@ -111,9 +111,9 @@ class ClassDrawerSearch extends React.PureComponent {
         resultOf = I18N.drawerSearchResultOf + '"' + this.state.searchedWord + '"';
       }
 
-      explain.push(
+      explain = [
         <ListItemText primary={resultOf} />
-      );
+      ];
     }else if(isTag){
       const tagName = this.state.articles? this.state.articles[0].tag: '';
       resultOf = 'タグ"'+ tagName + I18N.drawerSearchResultOf;
@@ -121,9 +121,9 @@ class ClassDrawerSearch extends React.PureComponent {
         resultOf = I18N.drawerSearchResultOf + I18N.drawerSearchResultTag + tagName;
       }
 
-      explain.push(
+      explain = [
         <ListItemText primary={resultOf} />
-      );
+      ];
     }
 
     const linkToSearch = "?word=" + this.state.searchWord;

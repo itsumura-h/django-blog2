@@ -128,6 +128,7 @@ class App extends Component {
             />
             <ClassMain
               timestamp={this.state.timestamp}
+              drawer_changeDrawerOpen={this.drawer_changeDrawerOpen}
             />
           </div>
         </div>

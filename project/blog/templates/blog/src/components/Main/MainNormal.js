@@ -99,6 +99,7 @@ class MainNormal extends React.PureComponent {
           <Chip
             label={tag.tag}
             clickable
+            onClick={this.props.appProps.drawer_changeDrawerOpen}
           />
         </Link>
       );
