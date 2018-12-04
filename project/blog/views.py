@@ -11,6 +11,7 @@ import math
 from .tables.Toppage import Toppage
 from .tables.Series import Series
 from .tables.Article import Article
+from .tables.Tag import Tag
 
 #デバッグ
 import pdb #pdb.set_trace()
@@ -53,10 +54,12 @@ def get_articles_en(request, series_id=1):
 #----------------------------------------------
 def get_article(request, timestamp=1):
     article = Article.search_article_by_timestamp(timestamp)
+    article['tags'] = Tag.search_tags_by_timestamp(timestamp)
     return JsonResponse({'value': article})
 
 def get_article_en(request, timestamp=1):
     article = Article.search_article_by_timestamp_en(timestamp)
+    article['tags'] = Tag.search_tags_by_timestamp_en(timestamp)
     return JsonResponse({'value': article})
 #----------------------------------------------
 def get_latests(request):
@@ -84,15 +87,31 @@ def getArticlesByKeyword(request, keyword):
     if keyword is '':
         return JsonResponse({'value': ''})
 
-    articles = Article.searchArticlesByKeyword(keyword)
+    articles = Article.search_articles_by_keyword(keyword)
     return JsonResponse({'value': articles})
 
 def getArticlesByKeyword_en(request, keyword):
     if keyword is '':
         return JsonResponse({'value': ''})
 
-    articles = Article.searchArticlesByKeyword_en(keyword)
+    articles = Article.search_articles_by_keyword_en(keyword)
     return JsonResponse({'value': articles})
+#----------------------------------------------
+def getArticlesByTagId(request, tag_id=1):
+    articles = Article.search_articles_by_tag_id(tag_id)
+    return JsonResponse({'value': articles})
+
+def getArticlesByTagId_en(request, tag_id=1):
+    articles = Article.search_articles_by_tag_id_en(tag_id)
+    return JsonResponse({'value': articles})
+#----------------------------------------------
+def getTagsByTimestamp(request, timestamp):
+    tags = Tag.search_tags_by_timestamp(timestamp)
+    return JsonResponse({'value': tags})
+
+def getTagsByTimestamp_en(request, article_id):
+    tags = Tag.search_tags_by_timestamp_en(timestamp)
+    return JsonResponse({'value': tags})
 #----------------------------------------------
 def error(request):
     return HttpResponseNotFound('<h1>API not found</h1>')

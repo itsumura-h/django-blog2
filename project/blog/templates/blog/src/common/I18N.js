@@ -12,6 +12,8 @@ const ja = {
   drawerSearchLabel: '検索ワード',
   drawerSearchButton: '検索',
   diariesWithClick: '雑記(クリックで開く)',
+  drawerSearchResultOf: '"の検索結果',
+  drawerSearchResultTag: 'タグ"',
 }
 
 const en = {
@@ -28,6 +30,8 @@ const en = {
   drawerSearchLabel: 'search word',
   drawerSearchButton: 'search',
   diariesWithClick: 'Diaries(Click here to open)',
+  drawerSearchResultOf: 'Search results of ',
+  drawerSearchResultTag: 'tag: ',
 }
 
 let I18N = null;

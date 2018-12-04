@@ -3,6 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import Chip from '@material-ui/core/Chip';
+import Link from 'react-router-dom/Link';
 
 import Models from '../../common/Models';
 
@@ -13,6 +15,7 @@ class MainNormal extends React.PureComponent {
     title: null,
     posted_on: null,
     updated_on: null,
+    tags: [],
   }
 
   getToppage=()=>{
@@ -52,7 +55,7 @@ class MainNormal extends React.PureComponent {
   componentDidMount(){
     this.getMainContent();
 
-    if(document.getElementsByTagName('pre').length>0){
+    if(document.getElementsByTagName('pre').length > 0){
       window.hljs.initHighlighting();
     }
   }
@@ -62,7 +65,7 @@ class MainNormal extends React.PureComponent {
       this.getMainContent();
     }
 
-    if(document.getElementsByTagName('pre').length>0){
+    if(document.getElementsByTagName('pre').length > 0){
       window.hljs.initHighlighting.called = false;
       window.hljs.initHighlighting();
     }
@@ -75,6 +78,8 @@ class MainNormal extends React.PureComponent {
     let posted_on_new = new Date(posted_on).toDateString();
     let updated_on = this.state.article? this.state.article.updated_on: '';
     updated_on = new Date(updated_on).toDateString();
+    let tags = this.state.article? this.state.article.tags: [];
+    const timestamp = window.location.pathname.split('/')[3];
 
     let header = (
       <CardHeader
@@ -82,6 +87,22 @@ class MainNormal extends React.PureComponent {
         subheader={'posted on:' + posted_on_new + ' , updated on:' + updated_on}
       />
     );
+
+    let tag_chips = [];
+    for(let tags_i in tags){
+      let tag = tags[tags_i];
+      tag_chips.push(
+        <Link
+          key={tags_i}
+          to={"/blog/search/"+timestamp+"?tag="+tag.id}
+        >
+          <Chip
+            label={tag.tag}
+            clickable
+          />
+        </Link>
+      );
+    }
 
     let card;
     if(posted_on){
@@ -91,6 +112,7 @@ class MainNormal extends React.PureComponent {
           raised={true}
         >
           {header}
+          <div>{tag_chips}</div>
           <div
             dangerouslySetInnerHTML={
               {__html: article_html} }
@@ -104,8 +126,7 @@ class MainNormal extends React.PureComponent {
           raised={true}
           dangerouslySetInnerHTML={
             {__html: article_html} }
-        >
-        </Card>
+        />
       );
     }
     

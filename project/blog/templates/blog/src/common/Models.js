@@ -113,4 +113,17 @@ export default class Models extends React.Component{
 
     return Util.getAPIWithoutCache(url);
   }
+
+  static getArticlesByTagId=(tagId)=>{
+    const language = window.localStorage.getItem('language');
+    let url;
+
+    if(language === 'ja' || !language){
+      url = '/blog/api/getArticlesByTagId/' + tagId;
+    }else{
+      url = '/blog/api/getArticlesByTagId_en/' + tagId;
+    }
+
+    return Util.getAPIWithoutCache(url);
+  }
 }

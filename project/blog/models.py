@@ -108,7 +108,7 @@ class Tag(models.Model):
 
 class Tagmap(models.Model):
     def __str__(self):
-        return str(self.tag) + ' ―― ' + str(self.article)
+        return str(self.tag)
 
     tag = models.ForeignKey(Tag, on_delete=models.PROTECT)
     article = models.ForeignKey(Article, on_delete=models.PROTECT)

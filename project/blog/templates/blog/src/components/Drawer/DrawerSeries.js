@@ -143,7 +143,7 @@ class ClassArticles extends React.PureComponent{
   }
 
   render(){
-    let seriesTitle = this.state.seriesTitle;
+    const seriesTitle = this.state.seriesTitle;
 
     const articles = [];
     for(let i in this.state.articles){
