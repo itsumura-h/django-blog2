@@ -13,6 +13,7 @@ pygments = "*"
 py-gfm = "*"
 orator = "*"
 django-cors-headers = "*"
+pyyaml = "*"
 
 [dev-packages]
 

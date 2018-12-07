@@ -158,3 +158,63 @@
     series: 3
     posted_on: 2018-10-12
     updated_on: 2018-10-12
+#------------------------------------------------------
+- model: blog.tag
+  pk: 1
+  fields:
+    tag: 記事1
+    tag_en: Article1
+
+- model: blog.tag
+  pk: 2
+  fields:
+    tag: 記事2
+    tag_en: Article2
+
+- model: blog.tag
+  pk: 3
+  fields:
+    tag: "記事1 タグ2"
+    tag_en: "Article1 tag2"
+#------------------------------------------------------
+- model: blog.tagmap
+  pk: 1
+  fields:
+    tag: 1
+    article: 4
+
+- model: blog.tagmap
+  pk: 2
+  fields:
+    tag: 1
+    article: 6
+
+- model: blog.tagmap
+  pk: 3
+  fields:
+    tag: 1
+    article: 8
+
+- model: blog.tagmap
+  pk: 4
+  fields:
+    tag: 2
+    article: 5
+
+- model: blog.tagmap
+  pk: 5
+  fields:
+    tag: 2
+    article: 7
+
+- model: blog.tagmap
+  pk: 6
+  fields:
+    tag: 2
+    article: 9
+
+- model: blog.tagmap
+  pk: 7
+  fields:
+    tag: 3
+    article: 4
